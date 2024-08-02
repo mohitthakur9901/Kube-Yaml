@@ -4,18 +4,20 @@ metadata:
   name: my-app-with-sidecar
 spec:
   containers:
-  - name: main-app
-    image: my-main-app-image:latest
-    command: ["sh", "-c", "echo 'Logging started' && tail -f /var/log/my-app.log"]
-    volumeMounts:
-    - name: log-volume
-      mountPath: /var/log
-  - name: log-collector
-    image: my-log-collector-image:latest
-    command: ["sh", "-c", "tail -f /var/log/my-app.log | tee /var/log/collected.log"]
-    volumeMounts:
-    - name: log-volume
-      mountPath: /var/log
+    - name: main-app
+      image: my-main-app-image:latest
+      command:
+        ["sh", "-c", "echo 'Logging started' && tail -f /var/log/my-app.log"]
+      volumeMounts:
+        - name: log-volume
+          mountPath: /var/log
+    - name: log-collector
+      image: my-log-collector-image:latest
+      command:
+        ["sh", "-c", "tail -f /var/log/my-app.log | tee /var/log/collected.log"]
+      volumeMounts:
+        - name: log-volume
+          mountPath: /var/log
   volumes:
-  - name: log-volume
-    emptyDir: {}
+    - name: log-volume
+      emptyDir: {}

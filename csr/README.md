@@ -30,5 +30,4 @@ kubectl certificate approve mohit
  kubectl get csr mohit -o jsonpath='{.status.certificate}' | base64 --decode > mohit.crt
 ```
 
-
 Feel free to copy this into a `README.md` file in your repository!

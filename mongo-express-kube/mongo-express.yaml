@@ -5,7 +5,7 @@ metadata:
   labels:
     app: web-app
 spec:
-  replicas: 2
+  replicas: 5
   selector:
     matchLabels:
       app: web-app
@@ -13,6 +13,7 @@ spec:
     metadata:
       labels:
         app: web-app
+      strategy: Recreate # It will delete all the pods and then create new ones
     spec:
       containers:
         - name: mongo-express

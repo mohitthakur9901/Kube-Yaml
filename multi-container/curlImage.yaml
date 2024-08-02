@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Depolyment
+metadata:
+  name: alpine-deployment
+spec:
+  selector:
+    matchLabels:
+      app: alpine
+  template:
+    metadata:
+      labels:
+        app: alpine
+    spec:
+      containers:
+        - name: alpine
+          image: alpine
+          ports:
+            - containerPort: 80
+        - name: nginx
+          image: nginx
+          command: ["bin/sh"]
+          args:
+            [
+              "-c",
+              "echo Hello from the alpine container! && apk add curl && sleep 3600",
+            ]
